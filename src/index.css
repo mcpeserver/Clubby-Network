@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-cinzel: "Cinzel", serif;
+  
+  --color-royal-blue: #0F2236;
+  --color-royal-blue-dark: #09131F;
+  --color-royal-blue-surface: #13263D;
+  --color-royal-crimson: #7A1E2C;
+  --color-royal-crimson-dark: #4C0F18;
+  --color-royal-gold: #D4AF37;
+  --color-royal-gold-light: #E7C76B;
+  --color-royal-cream: #F8F6F2;
+  --color-royal-green: #2E6B43;
+}
+

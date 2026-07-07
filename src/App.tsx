@@ -16,6 +16,7 @@ import RankList from "./components/RankList";
 import VoteSection from "./components/VoteSection";
 import CommunityGroups from "./components/CommunityGroups";
 import WhatsAppChannel from "./components/WhatsAppChannel";
+import GithubCollaboration from "./components/GithubCollaboration";
 import DonationSection from "./components/DonationSection";
 import Footer from "./components/Footer";
 
@@ -127,6 +128,9 @@ export default function App() {
 
         {/* 12. WhatsApp Channel */}
         <WhatsAppChannel whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} />
+
+        {/* Github Open Source Collaboration Section */}
+        <GithubCollaboration />
 
         {/* 13. Donation Section */}
         <DonationSection />

@@ -27,7 +27,6 @@ export default function StickyHeader({ communityGroupUrl }: StickyHeaderProps) {
     { label: "Ranks", href: "#ranks" },
     { label: "Vote", href: "#vote" },
     { label: "Donate", href: "#donate" },
-    { label: "Developer", href: "#footer" },
   ];
 
   const handleScrollTo = (id: string) => {

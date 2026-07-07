@@ -48,6 +48,23 @@ export const SOCIAL_LINKS = {
   discord: "https://discord.gg/9KUN2byKRM",
 };
 
+export const GITHUB_CONFIG = {
+  repoUrl: "https://github.com/mcpeserver/MyAPI",
+  websiteRepoUrl: "https://github.com/mcpeserver/clubby-network-portal",
+  license: "MIT License",
+  licenseUrl: "https://opensource.org/licenses/MIT",
+  contributors: [
+    { name: "Ran Dev", role: "Owner & Lead Developer", avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=RanDev" },
+    { name: "ClubbyKunz", role: "Co-Owner & SysAdmin", avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=ClubbyKunz" },
+    { name: "Minecraft Indo Contributor", role: "Community Moderator", avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Mod" },
+  ],
+  howToContribute: [
+    "Fork berkas kode website atau API ini di platform GitHub.",
+    "Lakukan perbaikan bug atau tambahkan fitur baru di branch fitur Anda.",
+    "Ajukan Pull Request (PR) resmi ke branch utama untuk direview oleh tim pengembang."
+  ]
+};
+
 export const VOTE_LINKS = {
   portal1: "http://clubbymc.my.id/vote",
   portal2: "http://clubbymc.my.id/vote2",

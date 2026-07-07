@@ -1,6 +1,6 @@
 {
-  "name": "Club Minecraft Indonesia",
-  "description": "Landing page resmi Komunitas Club Minecraft Indonesia (Clubby Network) - Info grup WA, Minecraft download, server status, dan info developer.",
+  "name": "Clubby Network",
+  "description": "Landing page resmi Komunitas Club Minecraft Indonesia (Clubby Network) - Info grup WA, Minecraft download, server status, ranks, vote, dan info developer.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

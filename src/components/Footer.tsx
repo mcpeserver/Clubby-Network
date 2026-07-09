@@ -5,25 +5,15 @@ interface FooterProps {
   config: DevConfig | null;
   whatsappChannelUrl: string;
   donateUrl: string;
+  onNavigate: (pageId: string) => void;
 }
 
-export default function Footer({ config, whatsappChannelUrl, donateUrl }: FooterProps) {
+export default function Footer({ config, whatsappChannelUrl, donateUrl, onNavigate }: FooterProps) {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  };
-
-  const handleScrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      const topOffset = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({
-        top: topOffset,
-        behavior: "smooth",
-      });
-    }
   };
 
   return (
@@ -50,33 +40,53 @@ export default function Footer({ config, whatsappChannelUrl, donateUrl }: Footer
             </span>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2.5">
               <button
-                onClick={() => handleScrollToSection("#download")}
+                onClick={() => onNavigate("home")}
                 className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
               >
-                Download
+                Home
               </button>
               <button
-                onClick={() => handleScrollToSection("#groups")}
+                onClick={() => onNavigate("server")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
+              >
+                Server Info
+              </button>
+              <button
+                onClick={() => onNavigate("download")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
+              >
+                Download MC
+              </button>
+              <button
+                onClick={() => onNavigate("community")}
                 className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
               >
                 Community
               </button>
-              <a
-                href={whatsappChannelUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left"
+              <button
+                onClick={() => onNavigate("ranks")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
               >
-                Channel
-              </a>
-              <a
-                href={donateUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left"
+                Ranks / VIP
+              </button>
+              <button
+                onClick={() => onNavigate("vote")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
+              >
+                Vote Portal
+              </button>
+              <button
+                onClick={() => onNavigate("donate")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
               >
                 Donate
-              </a>
+              </button>
+              <button
+                onClick={() => onNavigate("developer")}
+                className="text-xs text-gray-400 hover:text-royal-gold transition-colors text-left cursor-pointer"
+              >
+                Developer Hub
+              </button>
             </div>
           </div>
 

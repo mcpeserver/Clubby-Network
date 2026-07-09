@@ -5,16 +5,17 @@ import { motion } from "motion/react";
 interface QuickActionsProps {
   whatsappChannelUrl: string;
   donateUrl: string;
+  onNavigate: (pageId: string) => void;
 }
 
-export default function QuickActions({ whatsappChannelUrl, donateUrl }: QuickActionsProps) {
+export default function QuickActions({ whatsappChannelUrl, donateUrl, onNavigate }: QuickActionsProps) {
   const actions = [
     {
       title: "Download",
       description: "Ambil client Minecraft Stable & Beta gratis di sini.",
       icon: Download,
       color: "text-royal-gold border-royal-gold/20 hover:border-royal-gold/50",
-      target: "#download",
+      target: "download",
       external: false,
       hoverBg: "group-hover:bg-royal-gold/10 group-hover:text-royal-gold-light",
     },
@@ -23,7 +24,7 @@ export default function QuickActions({ whatsappChannelUrl, donateUrl }: QuickAct
       description: "Daftar grup WhatsApp resmi & obrolan sesama anggota.",
       icon: Users,
       color: "text-royal-crimson border-royal-crimson/20 hover:border-royal-crimson/50",
-      target: "#groups",
+      target: "community",
       external: false,
       hoverBg: "group-hover:bg-royal-crimson/10 group-hover:text-red-400",
     },
@@ -41,23 +42,16 @@ export default function QuickActions({ whatsappChannelUrl, donateUrl }: QuickAct
       description: "Dukung server dan komunitas agar tetap aktif berkembang.",
       icon: Coins,
       color: "text-amber-400 border-amber-500/20 hover:border-amber-500/50",
-      target: donateUrl,
-      external: true,
+      target: "donate",
+      external: false,
       hoverBg: "group-hover:bg-amber-500/10 group-hover:text-amber-300",
     },
   ];
 
-  const handleClick = (e: MouseEvent, href: string, isExternal: boolean) => {
+  const handleClick = (e: MouseEvent, target: string, isExternal: boolean) => {
     if (!isExternal) {
       e.preventDefault();
-      const element = document.querySelector(href);
-      if (element) {
-        const topOffset = element.getBoundingClientRect().top + window.scrollY - 100;
-        window.scrollTo({
-          top: topOffset,
-          behavior: "smooth",
-        });
-      }
+      onNavigate(target);
     }
   };
 

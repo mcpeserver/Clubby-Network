@@ -5,20 +5,10 @@ import heroSide from "../assets/images/minecraft_render_1783351232559.jpg";
 
 interface HeroSectionProps {
   communityGroupUrl: string;
+  onNavigate: (pageId: string) => void;
 }
 
-export default function HeroSection({ communityGroupUrl }: HeroSectionProps) {
-  const handleScrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      const topOffset = element.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({
-        top: topOffset,
-        behavior: "smooth",
-      });
-    }
-  };
-
+export default function HeroSection({ communityGroupUrl, onNavigate }: HeroSectionProps) {
   return (
     <section
       id="home"
@@ -66,7 +56,7 @@ export default function HeroSection({ communityGroupUrl }: HeroSectionProps) {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full sm:w-auto justify-center lg:justify-start">
             <button
-              onClick={() => handleScrollToSection("#about-clubby")}
+              onClick={() => onNavigate("server")}
               className="flex items-center justify-center gap-2 bg-royal-crimson border border-royal-crimson/50 text-white hover:bg-royal-crimson-dark px-6 py-3.5 rounded-2xl font-bold text-sm shadow-[0_0_15px_rgba(122,30,44,0.3)] hover:shadow-[0_0_25px_rgba(122,30,44,0.5)] transition-all duration-350 transform hover:scale-[1.03] active:scale-95 cursor-pointer"
             >
               <span>Join Server</span>
@@ -83,7 +73,7 @@ export default function HeroSection({ communityGroupUrl }: HeroSectionProps) {
             </a>
             
             <button
-              onClick={() => handleScrollToSection("#download")}
+              onClick={() => onNavigate("download")}
               className="flex items-center justify-center gap-2 bg-royal-blue-surface/80 border border-royal-gold/20 text-white hover:text-royal-gold-light hover:border-royal-gold/50 px-6 py-3.5 rounded-2xl font-bold text-sm backdrop-blur-md transition-all duration-350 transform hover:scale-[1.03] active:scale-95 shadow-md cursor-pointer"
             >
               <Download className="w-4 h-4" />

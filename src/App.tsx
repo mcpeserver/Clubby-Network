@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { DevConfig } from "./types";
 import { COMMUNITY_LINKS, DONATE_URL } from "./constants";
 
-import DeveloperTopBar from "./components/DeveloperTopBar";
 import StickyHeader from "./components/StickyHeader";
 import HeroSection from "./components/HeroSection";
 import QuickActions from "./components/QuickActions";
@@ -24,6 +23,7 @@ export default function App() {
   const [config, setConfig] = useState<DevConfig | null>(null);
   const [loading, setLoading] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [currentPage, setCurrentPage] = useState<string>("home");
 
   // Fallback configuration if fetch fails
   const fallbackConfig: DevConfig = {
@@ -68,6 +68,14 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavigate = (pageId: string) => {
+    setCurrentPage(pageId);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -87,58 +95,101 @@ export default function App() {
   return (
     <div className="min-h-screen bg-royal-blue-dark text-gray-100 selection:bg-royal-crimson selection:text-white relative">
       
-      {/* Sticky top wrapper containing both top bars so they scroll together cleanly */}
-      <div className="sticky top-0 z-50 w-full flex flex-col">
-        {/* 1. Developer Top Bar */}
-        <DeveloperTopBar config={config} />
-
-        {/* 2. Sticky Header */}
-        <StickyHeader communityGroupUrl={COMMUNITY_LINKS.mainGroupUrl} />
-      </div>
+      {/* Sticky top header - Sticks beautifully to top when scrolling */}
+      <StickyHeader 
+        communityGroupUrl={COMMUNITY_LINKS.mainGroupUrl} 
+        currentPage={currentPage} 
+        onNavigate={handleNavigate} 
+      />
 
       {/* Main Sections Wrapper */}
-      <main className="relative">
-        
-        {/* 3. Hero Section */}
-        <HeroSection communityGroupUrl={COMMUNITY_LINKS.mainGroupUrl} />
+      <main className="relative min-h-[60vh] overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            {currentPage === "home" && (
+              <>
+                {/* 3. Hero Section */}
+                <HeroSection onNavigate={handleNavigate} communityGroupUrl={COMMUNITY_LINKS.mainGroupUrl} />
 
-        {/* 4. Quick Navigation Cards */}
-        <QuickActions whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} donateUrl={DONATE_URL} />
+                {/* 4. Quick Navigation Cards */}
+                <QuickActions onNavigate={handleNavigate} whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} donateUrl={DONATE_URL} />
+              </>
+            )}
 
-        {/* 5. About Clubby Network */}
-        <AboutClubby />
+            {currentPage === "server" && (
+              <>
+                {/* 5. About Clubby Network */}
+                <AboutClubby />
 
-        {/* 6. Minecraft Download Section */}
-        <DownloadMinecraft />
+                {/* 8. Server Features */}
+                <ServerFeatures />
+              </>
+            )}
 
-        {/* 7. Community Section */}
-        <AboutCommunity />
+            {currentPage === "download" && (
+              <>
+                {/* 6. Minecraft Download Section */}
+                <DownloadMinecraft />
+              </>
+            )}
 
-        {/* 8. Server Features */}
-        <ServerFeatures />
+            {currentPage === "community" && (
+              <>
+                {/* 7. Community Section */}
+                <AboutCommunity />
 
-        {/* 9. Rank List */}
-        <RankList />
+                {/* 11. Community Groups */}
+                <CommunityGroups />
 
-        {/* 10. Vote Section */}
-        <VoteSection />
+                {/* 12. WhatsApp Channel */}
+                <WhatsAppChannel whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} />
+              </>
+            )}
 
-        {/* 11. Community Groups */}
-        <CommunityGroups />
+            {currentPage === "ranks" && (
+              <>
+                {/* 9. Rank List */}
+                <RankList />
+              </>
+            )}
 
-        {/* 12. WhatsApp Channel */}
-        <WhatsAppChannel whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} />
+            {currentPage === "vote" && (
+              <>
+                {/* 10. Vote Section */}
+                <VoteSection />
+              </>
+            )}
 
-        {/* Github Open Source Collaboration Section */}
-        <GithubCollaboration />
+            {currentPage === "donate" && (
+              <>
+                {/* 13. Donation Section */}
+                <DonationSection />
+              </>
+            )}
 
-        {/* 13. Donation Section */}
-        <DonationSection />
-
+            {currentPage === "developer" && (
+              <>
+                {/* Github Open Source Collaboration Section */}
+                <GithubCollaboration />
+              </>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       {/* 14. Footer */}
-      <Footer config={config} whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} donateUrl={DONATE_URL} />
+      <Footer 
+        config={config} 
+        whatsappChannelUrl={COMMUNITY_LINKS.whatsappChannelUrl} 
+        donateUrl={DONATE_URL} 
+        onNavigate={handleNavigate}
+      />
 
       {/* Floating Back to Top Button */}
       <AnimatePresence>
